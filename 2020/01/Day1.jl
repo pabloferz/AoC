@@ -25,7 +25,7 @@ function solve!(::Part2, input; debug = false)
     n = length(input)
     for (i, x) in enumerate(input)
         subinput = view(input, (i + 1):n)
-        j = searchsortedlast(subinput, 2020 - x)
+        j = searchsortedlast(input, 2020 - x)
         j == 0 && continue
         subinput = view(input, (i + 1):j)
         for y in subinput
