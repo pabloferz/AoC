@@ -9,10 +9,11 @@ struct Part2 end
 
 
 function solve(::Part1, expense_report)
-    for (i, entry) in enumerate(expense_report)
-        j = findnext(n -> entry + n == 2020, expense_report, i)
-        if j !== nothing
-            complement = expense_report[j]
+    sort!(expense_report)
+    for entry in expense_report
+        i = searchsortedlast(expense_report, 2020 - entry)
+        complement = expense_report[i]
+        if entry + complement == 2020
             return (entry, complement), entry * complement
         end
     end
@@ -27,7 +28,7 @@ function solve(::Part2, expense_report)
 end
 
 
-const EXPENSE_REPORT = parse.(Int, eachline("input"))
+const EXPENSE_REPORT = sort!(parse.(Int, eachline("input")))
 const PART1 = Part1()
 const PART2 = Part2()
 
