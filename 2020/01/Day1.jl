@@ -7,10 +7,12 @@ struct Part2 end
 
 function solve!(::Part1, input; debug = false)
     sort!(input)
-    for x in input
-        i = searchsortedlast(input, 2020 - x)
-        i == 0 && continue
-        y = input[i]
+    n = length(input)
+    for (i, x) in enumerate(input)
+        subinput = view(input, (i + 1):n)
+        j = searchsortedlast(subinput, 2020 - x)
+        j == 0 && continue
+        y = subinput[j]
         if x + y == 2020
             debug && @show(x, y)
             return x * y
@@ -20,8 +22,10 @@ end
 
 function solve!(::Part2, input; debug = false)
     sort!(input)
+    n = length(input)
     for (i, x) in enumerate(input)
-        j = searchsortedlast(input, 2020 - x)
+        subinput = view(input, (i + 1):n)
+        j = searchsortedlast(subinput, 2020 - x)
         j == 0 && continue
         subinput = view(input, (i + 1):j)
         for y in subinput
