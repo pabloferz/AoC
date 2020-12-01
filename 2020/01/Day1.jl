@@ -1,31 +1,42 @@
 module Day1
 
 
-using Combinatorics
-
-
 struct Part1 end
 struct Part2 end
 
 
-function solve(::Part1, expense_report)
-    sort!(expense_report)
-    for entry in expense_report
-        i = searchsortedlast(expense_report, 2020 - entry)
-        complement = expense_report[i]
-        if entry + complement == 2020
-            return (entry, complement), entry * complement
+function solve!(::Part1, input; debug = false)
+    sort!(input)
+    for x in input
+        i = searchsortedlast(input, 2020 - x)
+        i == 0 && continue
+        y = input[i]
+        if x + y == 2020
+            debug && @show(x, y)
+            return x * y
         end
     end
 end
 
-function solve(::Part2, expense_report)
-    for (l, m, n) in combinations(expense_report, 3)
-        if l + m + n == 2020
-            return (l, m, n), l * m * n
+function solve!(::Part2, input; debug = false)
+    sort!(input)
+    for (i, x) in enumerate(input)
+        j = searchsortedlast(input, 2020 - x)
+        j == 0 && continue
+        subinput = view(input, (i + 1):j)
+        for y in subinput
+            k = searchsortedlast(subinput, 2020 - x - y)
+            k == 0 && continue
+            z = subinput[k]
+            if x + y + z == 2020
+                debug && @show(x, y, z)
+                return x * y * z
+            end
         end
     end
 end
+
+solve(p::Union{Part1, Part2}, input; debug = false) = solve!(p, copy(input); debug = debug)
 
 
 const EXPENSE_REPORT = sort!(parse.(Int, eachline("input")))
@@ -33,7 +44,7 @@ const PART1 = Part1()
 const PART2 = Part2()
 
 
-export EXPENSE_REPORT, PART1, PART2, solve
+export EXPENSE_REPORT, PART1, PART2, solve!, solve
 
 
 end  # module Day1

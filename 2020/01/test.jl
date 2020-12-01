@@ -7,10 +7,10 @@ const expense_report = [1721, 979, 366, 299, 675, 1456]
 
 
 @testset "Part 1" begin
-    @test last(solve(PART1, expense_report)) == 514579
+    @test solve(PART1, expense_report) == 514579
 end
 
 
 @testset "Part 2" begin
-    @test last(solve(PART2, expense_report)) == 241861950
+    @test solve(PART2, expense_report) == 241861950
 end
