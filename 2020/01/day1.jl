@@ -3,7 +3,7 @@ using .Day1
 
 
 # Solve Part 1
-entries, solution = solve(PART, EXPENSE_REPORT)
+entries, solution = solve(PART1, EXPENSE_REPORT)
 #
 println("Part 1")
 println("------")
