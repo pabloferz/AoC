@@ -16,14 +16,14 @@ function solve(::Part1, input::BitSet; verbose = false)
 end
 
 function solve(::Part2, input::BitSet; verbose = false)
-    outter = iterate(input)
-    while outter !== nothing
-        x, state = outter
+    next = iterate(input)
+    while next !== nothing
+        x, state = next
         u = 2020 - x
-        inner = outter = iterate(input, state)
-        while inner !== nothing
-            y, state = inner
-            inner = iterate(input, state)
+        subsequent = next = iterate(input, state)
+        while subsequent !== nothing
+            y, state = subsequent
+            subsequent = iterate(input, state)
             y > u && break
             if (z = 2020 - x - y) in input
                 verbose && @show(x, y, z)
