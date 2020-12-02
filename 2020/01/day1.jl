@@ -6,11 +6,11 @@ using .Day1
 println("Part 1")
 println("------")
 println("Entries:")
-println("Solution: $(solve(PART1, EXPENSE_REPORT, debug = true))\n")
+println("Solution: $(solve(PART1, EXPENSE_REPORT; verbose = true))\n")
 
 
 # Solve Part 2
 println("Part 2")
 println("------")
 println("Entries:")
-println("Solution: $(solve(PART2, EXPENSE_REPORT, debug = true))\n")
+println("Solution: $(solve(PART2, EXPENSE_REPORT; verbose = true))\n")
