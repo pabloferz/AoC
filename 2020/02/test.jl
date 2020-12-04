@@ -9,9 +9,9 @@ const example = [
 ]
 
 @testset "Part 1" begin
-    @test solve(Part1(), policy_and_password.(example)) == 2
+    @test solve(Part1(), split_and_parse.(example)) == 2
 end
 
 @testset "Part 2" begin
-    @test solve(Part2(), policy_and_password.(example)) == 1
+    @test solve(Part2(), split_and_parse.(example)) == 1
 end

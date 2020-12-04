@@ -5,29 +5,28 @@ struct Part1 end
 struct Part2 end
 
 
-function policy_and_password(line)
-    lo, hi, char, pw = split(line, r"[-:\s]", keepempty = false)
-    return (
-        lo = parse(Int, lo),
-        hi = parse(Int, hi),
-        char = first(char),
-        pw = pw
-    )
+function split_and_parse(line; dlms = ('-', ' ', ':'))
+    lo, hi, char, pwd = split(line, dlms, keepempty = false)
+    return (parse(Int, lo), parse(Int, hi), first(char), pwd)
 end
 
+function matches_policy1(t)
+    lo, hi, char, pwd = t
+    return lo ≤ count(==(char), pwd) ≤ hi
+end
+function matches_policy2(t)
+    lo, hi, char, pwd = t
+    return (pwd[lo] == char) ⊻ (pwd[hi] == char)
+end
 
-policy1(t) = t.lo ≤ count(==(t.char), t.pw) ≤ t.hi
-policy2(t) = (t.pw[t.lo] == t.char) ⊻ (t.pw[t.hi] == t.char)
+solve(::Part1, input) = count(matches_policy1, input)
+solve(::Part2, input) = count(matches_policy2, input)
 
 
-solve(::Part1, input) = count(policy1, input)
-solve(::Part2, input) = count(policy2, input)
+const INPUT = split_and_parse.(eachline("input"))
 
 
-const INPUT = [policy_and_password(line) for line in eachline("input")]
-
-
-export Part1, Part2, INPUT, policy_and_password, solve
+export Part1, Part2, INPUT, split_and_parse, solve
 
 
 end  # module Day2
