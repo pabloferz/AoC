@@ -8,11 +8,7 @@ struct Part2 end
 id(s) = foldl((x, y) -> (x << 1) | ((y == 'R') | (y == 'B')), s; init = 0)
 
 solve(::Part1, input) = maximum(input)
-
-function solve(::Part2, input)
-    lo, hi = extrema(input)
-    return only(setdiff(lo:hi, input))
-end
+solve(::Part2, input) = ((α, ω) = extrema(input); only(setdiff(α:ω, input)))
 
 
 const INPUT = id.(eachline("input"))
