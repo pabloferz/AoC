@@ -5,20 +5,17 @@ struct Part1 end
 struct Part2 end
 
 
-const P = 2 .^ (6:-1:0)
+id(s) = foldl((x, y) -> (x << 1) | ((y == 'R') | (y == 'B')), s; init = 0)
 
+solve(::Part1, input) = maximum(input)
 
-function id(s)
-    sum(P[i] * (s[i  ] == 'B') for i = 1:7) * 8 + 
-    sum(P[i] * (s[i+3] == 'R') for i = 5:7)
+function solve(::Part2, input)
+    lo, hi = extrema(input)
+    return only(setdiff(lo:hi, input))
 end
 
 
 const INPUT = id.(eachline("input"))
-
-
-solve(::Part1, input) = maximum(input)
-solve(::Part2, input) = (sort!(input); only(setdiff(input[1]:input[end], input)))
 
 
 export INPUT, Part1, Part2, solve
