@@ -26,7 +26,7 @@ solve(::Part2, input) = count(matches_policy2, input)
 const INPUT = split_and_parse.(eachline("input"))
 
 
-export Part1, Part2, INPUT, split_and_parse, solve
+export INPUT, Part1, Part2, solve
 
 
 end  # module Day2

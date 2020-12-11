@@ -1,6 +1,12 @@
+module Day2Tests
+
+
 include("Day2.jl")
 using .Day2
 using Test
+
+import .Day2: split_and_parse
+
 
 const example = [
     "1-3 a: abcde"
@@ -15,3 +21,6 @@ end
 @testset "Part 2" begin
     @test solve(Part2(), split_and_parse.(example)) == 1
 end
+
+
+end # module Day2Tests
