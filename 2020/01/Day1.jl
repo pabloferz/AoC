@@ -7,10 +7,10 @@ const Parts = Union{Part1, Part2}
 
 
 function solve(::Part1, input::BitSet; verbose = false)
-    for x in input
-        if (y = 2020 - x) in input
-            verbose && @show(x, y)
-            return x * y
+    for a in input
+        if (b = 2020 - a) in input
+            verbose && @show(a, b)
+            return a * b
         end
     end
 end
@@ -18,16 +18,16 @@ end
 function solve(::Part2, input::BitSet; verbose = false)
     next = iterate(input)
     while next !== nothing
-        x, state = next
-        u = 2020 - x
-        subsequent = next = iterate(input, state)
-        while subsequent !== nothing
-            y, state = subsequent
-            subsequent = iterate(input, state)
-            y > u && break
-            if (z = 2020 - x - y) in input
-                verbose && @show(x, y, z)
-                return x * y * z
+        a, state = next
+        u = 2020 - a
+        next = inext = iterate(input, state)
+        while inext !== nothing
+            b, state = inext
+            inext = iterate(input, state)
+            b > u && break
+            if (c = 2020 - a - b) in input
+                verbose && @show(a, b, c)
+                return a * b * c
             end
         end
     end
@@ -36,12 +36,10 @@ end
 solve(p::Parts, input; verbose = false) = solve(p, BitSet(input); verbose = verbose)
 
 
-const EXPENSE_REPORT = BitSet(parse(Int, i) for i in eachline("input"))
-const PART1 = Part1()
-const PART2 = Part2()
+const INPUT = BitSet(parse(Int, i) for i in eachline("input"))
 
 
-export EXPENSE_REPORT, PART1, PART2, solve!, solve
+export INPUT, Part1, Part2, solve
 
 
 end  # module Day1
