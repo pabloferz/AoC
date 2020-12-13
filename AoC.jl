@@ -18,7 +18,7 @@ read_split_blocks(file) = split.(read_blocks(file), r"\n", keepempty = false)
 read_syms_ints(file) = split_sym_int.(eachline(file))
 
 function split_sym_int(line)
-    s, n = match(r"(\w+)(\d+)", line).captures
+    s, n = match(r"(\w+) ?([+-]?\d+)", line).captures
     return Symbol(s), parse(Int, n)
 end
 
