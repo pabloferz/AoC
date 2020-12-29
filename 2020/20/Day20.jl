@@ -105,10 +105,10 @@ end
 ρ₁(tile) = rotl90(tile)
 ρ₂(tile) = rot180(tile)
 ρ₃(tile) = rotr90(tile)
-μ₁(tile) = tile[:, end:-1:1]
-μ₂(tile) = tile[end:-1:1, :]
-δ₁(tile) = permutedims(tile)
-δ₂(tile) = (rot180 ∘ transpose)(tile)
+μ₁(tile) = rotr90(tile')      # or tile[:, end:-1:1]
+μ₂(tile) = rotl90(tile')      # or tile[end:-1:1, :]
+δ₁(tile) = permutedims(tile)  # or tile'
+δ₂(tile) = rot180(tile')
 
 const D₄ = (ρ₀, ρ₁, ρ₂, ρ₃, μ₁, μ₂, δ₁, δ₂)
 
@@ -179,12 +179,11 @@ const monster = encode([
 
 function part2(input)
     image = assemble!(input, arrange(adjacencies(input)))
-    c = CartesianIndex(size(image))
     for transform in D₄
         mask = transform(monster)
         offsets = CartesianIndex(0, 0):(CartesianIndex(size(image) .- size(mask)))
         C = CartesianIndices(mask)
-        m = count(o -> (image[(o .+ C)] .& mask) == mask, offsets)
+        m = count(o -> (image[o .+ C] .& mask) == mask, offsets)
         if m != 0
             return count(image) - m * count(mask)
         end
