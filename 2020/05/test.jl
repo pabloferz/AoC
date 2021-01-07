@@ -1,19 +1,16 @@
-module Day5Tests
+module Tests05
 
 
-include("Day5.jl")
-using .Day5
+include("Day05.jl")
+using .Day05
 using Test
 
 
-const example = nothing
-
-
 @testset "Seats IDs" begin
-    @test Day5.id("BFFFBBFRRR") == 567
-    @test Day5.id("FFFBBBFRRR") == 119
-    @test Day5.id("BBFFBBFRLL") == 820
+    @test Day05.id("BFFFBBFRRR") == 567
+    @test Day05.id("FFFBBBFRRR") == 119
+    @test Day05.id("BBFFBBFRLL") == 820
 end
 
 
-end
+end  # module Tests05
