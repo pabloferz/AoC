@@ -7,7 +7,7 @@ using .AoC
 using Combinatorics
 
 
-load_input() = read_ints("input")
+load_input() = read_ints(joinpath(@__DIR__,  "input"))
 
 solve(input, k) = only(prod(ₙCₖ) for ₙCₖ in combinations(input, k) if sum(ₙCₖ) == 2020)
 
