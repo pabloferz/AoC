@@ -1,11 +1,12 @@
-module Day2Tests
+module Tests02
 
 
-include("Day2.jl")
-using .Day2
+include("Day02.jl")
+
+using .Day02
 using Test
 
-import .Day2: split_and_parse
+import .Day02: split_and_parse
 
 
 const example = [
@@ -15,12 +16,12 @@ const example = [
 ]
 
 @testset "Part 1" begin
-    @test solve(Part1(), split_and_parse.(example)) == 2
+    @test part1(split_and_parse.(example)) == 2
 end
 
 @testset "Part 2" begin
-    @test solve(Part2(), split_and_parse.(example)) == 1
+    @test part2(split_and_parse.(example)) == 1
 end
 
 
-end # module Day2Tests
+end # module Tests02
