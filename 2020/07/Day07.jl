@@ -1,8 +1,12 @@
 module Day07
 
 
-include("../../AoC.jl"); using .AoC
+include("../../AoC.jl")
 
+using .AoC
+
+
+load_input() = Dict(parse_rule(line) for line in eachline(joinpath(@__DIR__, "input")))
 
 function parse_rule(line)
     outer, inner = split(line, r" bags contain ")
@@ -15,30 +19,31 @@ function parse_rule(line)
 end
 
 init(::Part1) = ("shiny gold", Set{String}())
-init(::Part2) = (("shiny gold", 1), Tuple{String,Int}[])
+init(::Part2) = (("shiny gold", 1), nothing)
 
 gather(::Part1, rules, rule) = (k for (k, v) in rules if haskey(v, rule))
 gather(::Part2, rules, rule) = ((bag, n) = rule; (k, n * v) for (k, v) in rules[bag])
 
-count(::Part1, found) = length(found)
-count(::Part2, found) = sum(last, found)
+count!(::Part1, found, rule) = rule in found ? 0 : (push!(found, rule); 1)
+count!(::Part2, found, rule) = last(rule)
 
-function solve(p::Union{Part1, Part2}, input)
+function solve(p::BothParts, input)
+    bags = 0
     start, found = init(p)
     queue = collect(gather(p, input, start))
     while !isempty(queue)
         rule = pop!(queue)
-        push!(found, rule)
+        bags += count!(p, found, rule)
         append!(queue, gather(p, input, rule))
     end
-    return count(p, found)
+    return bags
 end
 
+part1(input = load_input()) = solve(Part1(), input)
+part2(input = load_input()) = solve(Part2(), input)
 
-const INPUT = Dict(parse_rule(line) for line in eachline("input"))
 
-
-export INPUT, Part1, Part2, solve
+export part1, part2
 
 
 end  # module Day07

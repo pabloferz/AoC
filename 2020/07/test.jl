@@ -1,14 +1,13 @@
-module Day07Tests
+module Tests07
 
 
 include("Day07.jl")
+
 using .Day07
 using Test
 
-import .Day07: parse_rule
 
-
-const example = Dict(parse_rule.([
+const example = Dict(Day07.parse_rule.([
     "light red bags contain 1 bright white bag, 2 muted yellow bags."
     "dark orange bags contain 3 bright white bags, 4 muted yellow bags."
     "bright white bags contain 1 shiny gold bag."
@@ -20,7 +19,7 @@ const example = Dict(parse_rule.([
     "dotted black bags contain no other bags."
 ]))
 
-const another_example = Dict(parse_rule.([
+const another_example = Dict(Day07.parse_rule.([
     "shiny gold bags contain 2 dark red bags."
     "dark red bags contain 2 dark orange bags."
     "dark orange bags contain 2 dark yellow bags."
@@ -30,15 +29,14 @@ const another_example = Dict(parse_rule.([
     "dark violet bags contain no other bags."
 ]))
 
-
 @testset "Part 1" begin
-    @test solve(Part1(), example) == 4
+    @test part1(example) == 4
 end
 
 @testset "Part 2" begin
-    @test solve(Part2(), example) == 32
-    @test solve(Part2(), another_example) == 126
+    @test part2(example) == 32
+    @test part2(another_example) == 126
 end
 
 
-end  # module Day07Tests
+end  # module Tests07
