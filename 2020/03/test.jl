@@ -1,8 +1,11 @@
-module Day3Tests
+module Tests03
 
 
-include("Day3.jl")
-using .Day3
+include("../../AoC.jl")
+include("Day03.jl")
+
+using .AoC
+using .Day03
 using Test
 
 
@@ -21,14 +24,13 @@ const example = encode(split("""
     '\n'
 ))
 
-
 @testset "Part 1" begin
-    @test solve(Part1(), example) == 7
+    @test part1(example) == 7
 end
 
 @testset "Part 2" begin
-    @test solve(Part2(), example) == 336
+    @test part2(example) == 336
 end
 
 
-end
+end  # Tests03
