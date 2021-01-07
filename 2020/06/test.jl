@@ -1,8 +1,8 @@
-module Day6Tests
+module Tests06
 
 
-include("Day6.jl")
-using .Day6
+include("Day06.jl")
+using .Day06
 using Test
 
 
@@ -24,17 +24,15 @@ a
 b
 """
 
-const example = split.(split(raw_example, r"\n\n"), r"\n", keepempty = false)
-
-
+const example = split.(split(raw_example, r"\R\R"), r"\R", keepempty = false)
 
 @testset "Part 1" begin
-    @test solve(Part1(), example) == 11
+    @test part1(example) == 11
 end
 
 @testset "Part 2" begin
-    @test solve(Part2(), example) == 6
+    @test part2(example) == 6
 end
 
 
-end
+end  # module Tests06
