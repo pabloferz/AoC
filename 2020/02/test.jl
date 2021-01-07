@@ -7,7 +7,7 @@ using .Day02
 using Test
 
 
-const example = Day02.split_and_parse([
+const example = Day02.split_and_parse.([
     "1-3 a: abcde"
     "1-3 b: cdefg"
     "2-9 c: ccccccccc"
