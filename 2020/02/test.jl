@@ -24,4 +24,4 @@ end
 end
 
 
-end # module Tests02
+end  # module Tests02
