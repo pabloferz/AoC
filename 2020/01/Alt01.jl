@@ -1,21 +1,22 @@
-module Day1
+module Alt01
 
 
-struct Part1 end
-struct Part2 end
-const Parts = Union{Part1, Part2}
+include("../../AoC.jl")
+
+using .AoC
 
 
-function solve(::Part1, input::BitSet; verbose = false)
+load_input() = BitSet(parse(Int, i) for i in eachline("input"))
+
+function solve(::Part1, input::BitSet)
     for a in input
         if (b = 2020 - a) in input
-            verbose && @show(a, b)
             return a * b
         end
     end
 end
 
-function solve(::Part2, input::BitSet; verbose = false)
+function solve(::Part2, input::BitSet)
     next = iterate(input)
     while next !== nothing
         a, state = next
@@ -26,20 +27,13 @@ function solve(::Part2, input::BitSet; verbose = false)
             inext = iterate(input, state)
             b > u && break
             if (c = 2020 - a - b) in input
-                verbose && @show(a, b, c)
                 return a * b * c
             end
         end
     end
 end
 
-solve(p::Parts, input; verbose = false) = solve(p, BitSet(input); verbose = verbose)
+solve(p::BothParts, input = load_input()) = solve(p, BitSet(input))
 
 
-const INPUT = BitSet(parse(Int, i) for i in eachline("input"))
-
-
-export INPUT, Part1, Part2, solve
-
-
-end  # module Day1
+end  # module Alt01
