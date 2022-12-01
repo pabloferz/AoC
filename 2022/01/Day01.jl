@@ -7,8 +7,8 @@ using .AoC
 
 
 function load_input(file = joinpath(@__DIR__, "input"))
-    list = parse_ints.(read_split_blocks(file))
-    return sort!(sum.(list))
+    list = read_split_blocks(file)
+    return sort!([sum(parse(Int, i) for i in block) for block in list])
 end
 
 part1(input = load_input()) = last(input)
