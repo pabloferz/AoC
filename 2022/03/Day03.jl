@@ -11,7 +11,8 @@ const kPriorities = Dict(k => v for (v, k) in enumerate(prod('a':'z') * prod('A'
 
 load_input(file = joinpath(@__DIR__, "input")) = readlines(file)
 
-split_half(str) = (n = length(str) ÷ 2; @views (str[1:n], str[n+1:end]))
+split_half(str) = (n = length(str) ÷ 2; (str[1:n], str[n+1:end]))
+
 solve(input, f, indices) = sum(kPriorities[(only ∘ ∩)(f(i)...)] for i in indices)
 
 part1(input = load_input()) = solve(input, i -> split_half(input[i]), 1:length(input))
