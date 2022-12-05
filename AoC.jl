@@ -41,16 +41,16 @@ end
 
 parse_ints(list) = parse.(Int, list)
 
-function read_ints(file, sort = false)
+function read_ints(file; should_sort = false)
     ints = parse.(Int, eachline(file))
-    if sort
+    if should_sort
         sort!(ints)
     end
     return ints
 end
 
-read_blocks(file) = split(read(file, String), r"\R\R", keepempty = false)
-read_split_blocks(file) = split.(read_blocks(file), r"\R", keepempty = false)
+read_blocks(file) = split(readchomp(file), r"\R\R"; keepempty = false)
+read_split_blocks(file) = split.(read_blocks(file), r"\R"; keepempty = false)
 read_syms_ints(file) = split_sym_int.(eachline(file))
 
 function split_sym_int(line)
