@@ -24,7 +24,7 @@ function parse_input(file = joinpath(@__DIR__, "input"))
     return cranes, procedure
 end
 
-function solve(push_fn!, input)
+function solve(input; push_fn! = push!)
     cranes, procedure = deepcopy(first(input)), last(input)
     slice = Char[]
     for (n, from, to) in procedure
@@ -39,8 +39,8 @@ end
 
 const kInput = parse_input()
 
-part1(input = kInput) = solve(push!, input)
-part2(input = kInput) = solve(pushfirst!, input)
+part1(input = kInput) = solve(input)
+part2(input = kInput) = solve(input; push_fn! = pushfirst!)
 
 
 export parse_input, part1, part2
