@@ -24,7 +24,7 @@ function tree_lines(c, n)
     return (U, D, L, R)
 end
 
-probe(trees, c, ranges) = count_find(≥(trees[c]), @view trees[ranges...])
+probe(trees, c, ranges) = count_to_first(≥(trees[c]), @view trees[ranges...])
 
 function solve(trees, reduce, evaluate)
     n = size(trees, 1)

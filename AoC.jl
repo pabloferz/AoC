@@ -29,7 +29,7 @@ function get_input(year, day; session_cookie_file = joinpath(@__DIR__, "session-
     return nothing
 end
 
-function count_find(pred, itr)
+function count_to_first(pred, itr)
     counter = 0
     found = false
     for val in itr
@@ -72,7 +72,7 @@ end
 
 
 export BothParts, EndSlice, Part1, Part2,
-    count_find, encode, get_input, noop, parse_ints,
+    count_to_first, encode, get_input, noop, parse_ints,
     read_ints, read_blocks, read_split_blocks, read_syms_ints, split_sym_int
 
 
