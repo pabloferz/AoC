@@ -73,7 +73,7 @@ end
 
 export BothParts, EndSlice, Part1, Part2,
     count_find, encode, get_input, noop, parse_ints,
-    read_ints, read_blocks, read_split_blocks, read_syms_ints
+    read_ints, read_blocks, read_split_blocks, read_syms_ints, split_sym_int
 
 
 end  # module AoC
