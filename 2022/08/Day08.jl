@@ -32,9 +32,7 @@ end
 
 function solve(trees, reduce, evaluate)
     n = size(trees, 1)
-    reduce(CartesianIndices(trees)) do c
-        evaluate(probe.((trees,), (c,), tree_lines(c, n)))
-    end
+    return reduce(evaluate(probe.((trees,), (c,), tree_lines(c, n))) for c in CartesianIndices(trees))
 end
 
 const kInput = parse_input()
