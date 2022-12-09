@@ -29,6 +29,16 @@ function get_input(year, day; session_cookie_file = joinpath(@__DIR__, "session-
     return nothing
 end
 
+function count_find(pred, itr)
+    counter = 0
+    found = false
+    for val in itr
+        counter += 1
+        pred(val) && (found = true) && break
+    end
+    return counter, found
+end
+
 function encode(lines; dict = Dict('#' => true, '.' => false))
     v = eltype(values(dict))[]
     rows = 0
@@ -38,6 +48,8 @@ function encode(lines; dict = Dict('#' => true, '.' => false))
     end
     return reshape(v, :, rows)'
 end
+
+noop(args...) = nothing
 
 parse_ints(list) = parse.(Int, list)
 
@@ -60,7 +72,8 @@ end
 
 
 export BothParts, EndSlice, Part1, Part2,
-    encode, get_input, parse_ints, read_ints, read_blocks, read_split_blocks, read_syms_ints
+    count_find, encode, get_input, noop, parse_ints,
+    read_ints, read_blocks, read_split_blocks, read_syms_ints
 
 
 end  # module AoC
